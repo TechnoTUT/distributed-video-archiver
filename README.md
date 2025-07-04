@@ -14,3 +14,8 @@ cronなどで30分ごとに実行する。
 15,45 * * * * /path/to/send.sh
 ```
 ## 動画処理拠点側
+### utone_transfer.bat
+録画拠点から転送された.tsファイルを圧縮して共有ストレージにパスするスクリプト。処理開始から30分ごとに、一時受け入れフォルダ内のtsファイルを探索しNVEncを用いてMP4形式に変換する。
+処理端末側の一時受け入れフォルダに [ytone_transfer.bat](/source/utone_transfer.bat)を配置し、実行する。
+
+FFmpegと、NVEncに対応したGPUが必要です。
