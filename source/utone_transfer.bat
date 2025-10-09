@@ -12,13 +12,13 @@ setlocal enabledelayedexpansion
 
 :: 変換後のMP4ファイルを移動する先のディレクトリ
 :: イベントごとにUtone_Rec以下を書き換える必要あり
-set "DestinationDir=\\10.1.70.0\share\Utone_Rec\20250705_utone4_x_gilleworkers"
+set "DestinationDir=\\10.1.70.0\share\Utone_Rec\251011-12_utone6_extended"
 
 :: ファイル検索の間隔（秒）
-set "CheckIntervalSeconds=1800"
+set "CheckIntervalSeconds=300"
 
 :: FFmpegのエンコード設定
-set "ffmpegOptions=-c:v hevc_nvenc -preset p7 -cq 20 -c:a aac"
+set "ffmpegOptions=-copyts -start_at_zero -c:v hevc_nvenc -preset p7 -cq 20 -c:a aac"
 
 :: --- スクリプト本体 ---
 
@@ -55,7 +55,7 @@ for %%F in ("*.ts") do (
     ren "%%~fF" "!processingFile!"
 
     :: FFmpegコマンドを実行
-    echo Start encoding: ffmpeg -i "!processingFile!" %ffmpegOptions% "!outputMp4Path!"
+    echo Start encoding with: ffmpeg -i "!processingFile!" %ffmpegOptions% "!outputMp4Path!"
     ffmpeg -i "!processingFile!" %ffmpegOptions% "!outputMp4Path!"
 
     :: FFmpegの実行結果を確認 (errorlevelが0なら成功)
